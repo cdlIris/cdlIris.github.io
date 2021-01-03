@@ -81,7 +81,7 @@ SELECT COUNT(*) FROM Users;
 ### Dates
 - no go below 
 - TIMESTAMP: YYYY-MM-DD HH:MM:SS
-	- # of seconds since 1970, stored in a 32-bit number
+	- \# of seconds since 1970, stored in a 32-bit number
 	- absolut sort of length
 	- problem until 2023, 2 billion seconds(64-bit then)
 - DATETIME: YYYY-MM-DD HH:MM:SS
