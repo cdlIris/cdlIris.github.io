@@ -81,11 +81,11 @@ SELECT COUNT(*) FROM Users;
 ### Dates
 - no go below 
 - TIMESTAMP: YYYY-MM-DD HH:MM:SS
-  - # of seconds since 1970, stored in a 32-bit number
-  - absolut sort of length
-  - Y3K problem until 2023, 2 billion seconds(64-bit then)
+	- # of seconds since 1970, stored in a 32-bit number
+	- absolut sort of length
+	- problem until 2023, 2 billion seconds(64-bit then)
 - DATETIME: YYYY-MM-DD HH:MM:SS
-  - any year, more space
+	- any year, more space
 - DATE: YYYY-MM-DD
 - TIME: HH:MM:SS
 - buitin MySQL function NOW()
