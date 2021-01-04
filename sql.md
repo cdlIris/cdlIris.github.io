@@ -9,14 +9,17 @@ CREATE DATABASE People DEFAULT CHARACTER SET utf8;
 
 USE People;
 
-CREATE TABLE UserS (
+CREATE TABLE Users (
+  user_id PRIMARY KEY INT UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(128),
-  email VARCHAR(128)
+  email VARCHAR(128),
+  PRIMARY KEY (user_id),
+  INDEX (name)
 );
 
 DESCRIBE Users;
 
-INSERT INTO Users (name, email) VALUES ("Tester" "Tester@email.com");
+INSERT INTO Users (name, email) VALUES ("Tester","Tester@email.com");
 
 DELETE FROM Users WHERE email="Tester@email.com";
 
@@ -89,3 +92,17 @@ SELECT COUNT(*) FROM Users;
 - DATE: YYYY-MM-DD
 - TIME: HH:MM:SS
 - buitin MySQL function NOW()
+
+### AUTO_INCREMENT 
+join tables together need a primary int key for each row
+
+### Index
+when too much records
+hashes (exact matches) or trees (prefix matches or sorting) 
+- good for individual row loopup and sorting/grouping results 
+- works best with exact mthces or prefix loopups 
+- can suggst HASH or BTREE 
+
+#### Keys
+- primiary keys: find row in table (little space, exact match, no duplicate, fast for int fields)
+- foreign keys: reference to primiary key in other table
