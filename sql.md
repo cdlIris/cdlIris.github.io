@@ -106,3 +106,57 @@ hashes (exact matches) or trees (prefix matches or sorting)
 #### Keys
 - primiary keys: find row in table (little space, exact match, no duplicate, fast for int fields)
 - foreign keys: reference to primiary key in other table
+
+## Building a Data Model
+- Basic Rule: do not put the same string data in twice - use a relshtionship instead. 
+- there should only be one copy of that thing in the database
+
+### Database Normalizaiton (3NF)
+- do not replicate data. Reference data instead
+- Use int for keys and references
+- Add a speical key column to each table, which you will make references to 
+
+### Int Reference Pattern
+- AUTO_INCREMENT, we use int columns in one table to ference rows in another table.
+
+### Three kinds of keys
+- primary key, generally an int auto-increment
+- logical key, what the outside world uses for lookup (ex: title)
+- foreign key, generally an int key pointing to a row in another table
+
+### Primary Key Rules:
+- never use your logical key as the primary key
+- logical keys can and do change, albeit slowly
+- relationships that are based on matching string fields are less efficient that ints.
+
+### Foreign Keys
+- when a table has a column contaiing a key that points to the primary key of another table
+- when all primary keys are ints, then all foreign eys are ints. 
+
+```
+CREATE TABLE Album(
+	album_id INTEGER NOT NULL AUTO_INCREMENT,
+	title VARCHAR(255),
+	artist_id INTEGER,
+	PRIMARY KEY(album_id),
+	INDEX USING BTREE (title),
+	
+	CONSTRAINT FOREIGN KEY(artist_id)
+	 REFERENCES Artist (artist_id)
+	 ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB;
+```
+### Join
+- Use Join with On, get all the combanations of the rows between two tables, filtering with the on clause. 
+- If only use JOIN, give all combanations of all rows between 2 tabels. 
+```
+SELECT album.title, artist.name FROM album JOIN artist ON album.artist_id = artist.artist_id
+```
+- the speed using SQL is much faster
+
+### ON DELETE CASCADE 
+If the primary key is deleted, then the rows containng that foreign key in other table will be deleted 
+- Default/ RESTRICT, Do not allow changes that break the parent rows 
+- CASCADE, adjust child rows by removing or updating to maintain conssitency
+- SET NULL, set the foreign key columns in the child rows to null. 
+
